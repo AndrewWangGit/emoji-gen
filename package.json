@@ -1,0 +1,25 @@
+{
+  "name": "emoji-gen",
+  "version": "1.0.0",
+  "description": "AI-powered custom emoji generator with token-based billing",
+  "main": "server/server.js",
+  "scripts": {
+    "build": "cd client && npm install && npm run build",
+    "start": "cd server && npm install && npm start",
+    "dev": "concurrently \"cd server && npm run dev\" \"cd client && npm start\"",
+    "server": "cd server && npm run dev",
+    "client": "cd client && npm start",
+    "install:all": "npm install && cd server && npm install && cd ../client && npm install",
+    "postinstall": "npm run build"
+  },
+  "keywords": ["emoji", "ai", "generator", "stripe", "gemini", "react", "express"],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
