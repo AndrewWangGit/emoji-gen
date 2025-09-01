@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './App.css';
 import Login from './Login';
 import MyEmojis from './MyEmojis';
@@ -137,7 +137,7 @@ function App() {
   };
 
   // Fetch user tokens
-  const fetchUserTokens = async (email: string) => {
+  const fetchUserTokens = useCallback(async (email: string) => {
     try {
       const response = await fetch(`${API_BASE_URL}/api/user-tokens/${encodeURIComponent(email)}`);
       const data = await response.json();
@@ -147,7 +147,7 @@ function App() {
     } catch (error) {
       console.error('Error fetching tokens:', error);
     }
-  };
+  }, []);
 
   // Check for existing authentication on app load
   useEffect(() => {

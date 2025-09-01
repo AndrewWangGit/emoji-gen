@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './MyEmojis.css';
 import { API_BASE_URL } from './config';
 
@@ -23,11 +23,7 @@ function MyEmojis({ userEmail }: MyEmojisProps) {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>('');
 
-  useEffect(() => {
-    fetchMyEmojis();
-  }, [userEmail]);
-
-  const fetchMyEmojis = async () => {
+  const fetchMyEmojis = useCallback(async () => {
     try {
       setIsLoading(true);
       setError('');
@@ -46,7 +42,11 @@ function MyEmojis({ userEmail }: MyEmojisProps) {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [userEmail]);
+
+  useEffect(() => {
+    fetchMyEmojis();
+  }, [fetchMyEmojis]);
 
   const handleDownload = (emoji: Emoji) => {
     const link = document.createElement('a');
