@@ -177,14 +177,14 @@ function App() {
     };
 
     checkAuthStatus();
-  }, []);
+  }, [fetchUserTokens]);
 
   // Fetch tokens when user logs in
   useEffect(() => {
     if (isAuthenticated && userEmail) {
       fetchUserTokens(userEmail);
     }
-  }, [isAuthenticated, userEmail]);
+  }, [isAuthenticated, userEmail, fetchUserTokens]);
 
   // Check for purchase success/cancellation in URL
   useEffect(() => {
@@ -204,7 +204,7 @@ function App() {
       // Clean up URL
       window.history.replaceState({}, document.title, window.location.pathname);
     }
-  }, [userEmail]);
+  }, [userEmail, fetchUserTokens]);
 
   // Show loading spinner while checking authentication
   if (isLoading) {
